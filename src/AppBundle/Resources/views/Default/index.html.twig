@@ -1,0 +1,35 @@
+{% extends '@App/layout.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% block body %}
+    <h1>{{ name }}</h1>
+{{ form_start(form, {'attr': {'class': 'ajax-form'}}) }}
+{{ form_widget(form) }}
+{{ form_end(form) }}
+    <div class="result"></div>
+    <script>
+        $(document).ready(function () {
+            var jqFormXHR = null;
+            $('body').on('submit', '.ajax-form', function () {
+                var form = $(this);
+                form.ajaxSubmit({
+                    beforeSend: function (_jqFormXHR) {
+                        if (jqFormXHR != null && jqFormXHR.hasOwnProperty('abort')) {
+                            jqFormXHR.abort();
+                        }
+
+                        jqFormXHR = _jqFormXHR;
+                    },
+                    success: function (data) {
+                       $('.result').html(data);
+                    }
+                });
+
+                return false;
+            });
+            $('.ajax-form').submit();
+            $('.ajax-form').on('change keyup mouseup', function () {
+                $(this).submit();
+            })
+        })
+    </script>
+{% endblock %}

@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    - { resource: "@CoreBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -57,6 +58,13 @@ doctrine:
         auto_generate_proxy_classes: '%kernel.debug%'
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
+
+# Migration bundle Configure
+doctrine_migrations:
+    dir_name: "%kernel.project_dir%/src/CoreBundle/Migrations"
+    namespace: CoreBundle\Migrations
+    table_name: migration_versions
+    name: Okp Calculator Migrations
 
 # Swiftmailer Configuration
 swiftmailer:
