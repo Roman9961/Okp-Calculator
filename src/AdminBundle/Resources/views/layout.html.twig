@@ -1,0 +1,43 @@
+{% extends 'AvanzuAdminThemeBundle:layout:default-layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('assets-vendor/css/bootstrap.css') }}" rel="stylesheet" media="screen">
+    <link href="{{ asset('assets-vendor/css/fileupload.css') }}" rel="stylesheet" media="screen">
+    <link href="{{ asset('assets-vendor/css/select2.css') }}" rel="stylesheet" media="screen">
+    {#<link href="{{ asset('assets-src/css/admin_main.less') }}" rel="stylesheet" media="screen">#}
+{% endblock %}
+
+{% block javascripts_head %}
+    {{ parent() }}
+    <script src="{{ asset('assets-vendor/js/jquery.js') }}"></script>
+    <script src="{{ asset('assets-vendor/js/bootstrap.js') }}"></script>
+    <script src="{{ asset('assets-vendor/js/fileupload.js') }}"></script>
+    <script src="{{ asset('assets-vendor/js/select2.js') }}"></script>
+    {#<script src="{{ asset('assets-src/js/endless.pagination.js') }}"></script>#}
+{% endblock %}
+
+{% block title %}Control panel{% endblock %}
+
+{% block avanzu_logo %}
+    <a href="{{ path('admin_homepage') }}" class="logo">
+        Главная страница
+    </a>
+{% endblock %}
+
+{% block avanzu_sidebar %}
+    {% if app.user is not null and is_granted('IS_AUTHENTICATED_FULLY') %}
+        {{ render(controller('AvanzuAdminThemeBundle:Sidebar:userPanel')) }}
+    {% endif %}
+    {{ render(controller('AvanzuAdminThemeBundle:Sidebar:menu', {'request':app.request})) }}
+{% endblock %}
+
+{% block page_subtitle %}{% endblock %}
+
+{% block avanzu_admin_footer %}
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/avanzuadmintheme/static/'~app.environment~'/scripts/admin-lte.js') }}"></script>
+    <script src="{{ asset('assets-vendor/js/fileupload.js') }}"></script>
+{% endblock %}

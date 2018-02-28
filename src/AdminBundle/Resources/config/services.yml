@@ -1,0 +1,6 @@
+services:
+
+  setup.knp.menu.listener:
+      class: AdminBundle\Service\SetupKnpMenuListener
+      tags:
+          - { name: kernel.event_listener, event:theme.sidebar_setup_menu, method:onSetupMenu }
