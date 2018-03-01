@@ -20,8 +20,8 @@ class AppKernel extends Kernel
             new CoreBundle\CoreBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new AdminBundle\AdminBundle(),
-            new Avanzu\AdminThemeBundle\AvanzuAdminThemeBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            new Avanzu\AdminThemeBundle\AvanzuAdminThemeBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

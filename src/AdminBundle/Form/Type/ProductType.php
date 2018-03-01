@@ -1,7 +1,7 @@
 <?php
 
 
-namespace AppBundle\Form\Type;
+namespace AdminBundle\Form\Type;
 
 
 use CoreBundle\Entity\Paper;
@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -22,14 +23,8 @@ class ProductType extends AbstractType
                 'label'=>'Print',
                 'class' => Printing::class,
                 'choice_label' => 'name',
-                'query_builder' => function (EntityRepository $er) use($options) {
-                    $qb = $er->createQueryBuilder('print');
-
-                    $qb->join('print.products', 'prod')
-                        ->andwhere('prod.id = :product')
-                        ->setParameter('product', $options['data']);
-                    return $qb;
-                },
+                'multiple' => true,
+                'expanded' => true,
             ])
             ->add('papers', EntityType::class,[
                 'label'=>'Paper',
@@ -37,16 +32,11 @@ class ProductType extends AbstractType
                 'choice_label' => function ($printing) {
                     return $printing->getName() . ' ' . $printing->getDensity();
                 },
-                'query_builder' => function (EntityRepository $er) use($options) {
-                $qb = $er->createQueryBuilder('p');
+                'multiple' => true,
+                'expanded' => true,
 
-                        $qb->join('p.products', 'prod')
-                            ->andwhere('prod.id = :product')
-                            ->setParameter('product', $options['data']);
-                    return $qb;
-                },
             ])
-            ->add('count', NumberType::class,['data' => 10]);
+            ->add('Submit', SubmitType::class);
     }
 
 //    public function configureOptions(OptionsResolver $resolver)

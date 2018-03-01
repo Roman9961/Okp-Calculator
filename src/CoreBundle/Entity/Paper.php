@@ -2,6 +2,7 @@
 
 namespace CoreBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -49,10 +50,24 @@ class Paper
     private $type;
 
     /**
+     * @ORM\ManyToMany(targetEntity="CoreBundle\Entity\Product", mappedBy="papers")
+     */
+    private $products;
+
+    /**
      * @ORM\ManyToOne(targetEntity="CoreBundle\Entity\Currency", inversedBy="papers")
      * @ORM\JoinColumn(nullable=true)
      */
     private $currency;
+
+    /**
+     * Paper constructor.
+     * @param $products
+     */
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
 
     /**
      * @return mixed

@@ -32,14 +32,16 @@ framework:
     assets: ~
     php_errors:
         log: true
+    templating:
+        engines: ['twig']
 
 # Twig Configuration
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
-    form_themes:
-        - 'AppBundle::forms.html.twig'
-        - 'bootstrap_3_layout.html.twig'
+#    form_themes:
+#        - 'AppBundle::forms.html.twig'
+#        - 'bootstrap_3_layout.html.twig'
 
 # Doctrine Configuration
 doctrine:

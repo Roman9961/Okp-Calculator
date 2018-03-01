@@ -2,6 +2,7 @@
 
 namespace CoreBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -40,6 +41,19 @@ class Printing
      */
     private $sideB;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="CoreBundle\Entity\Product", mappedBy="printings")
+     */
+    private $products;
+
+    /**
+     * Printing constructor.
+     * @param $products
+     */
+    public function __construct($products)
+    {
+        $this->products = new ArrayCollection();
+    }
 
     /**
      * Get id

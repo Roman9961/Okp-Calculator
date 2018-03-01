@@ -2,14 +2,19 @@
 
 namespace AdminBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use AdminBundle\Form\Type\ProductType;
+use Symfony\Component\HttpFoundation\Request;
 
-class DefaultController extends Controller
+class DefaultController extends BaseController
 {
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        return $this->render('@Admin/Default/index.html.twig');
+        $product = $em->getRepository('CoreBundle:Product')->findAll();
+//        $print = $repo('CoreBundle:Product')->fin;
+        return $this->render('@Admin/Default/index.html.twig', [
+            'product' => $product
+        ]);
     }
 }

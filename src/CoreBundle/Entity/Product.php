@@ -30,12 +30,14 @@ class Product
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity="CoreBundle\Entity\Paper")
+     * @ORM\ManyToMany(targetEntity="CoreBundle\Entity\Paper", inversedBy="products")
+     * @ORM\JoinTable(name="product_paper")
      */
     private $papers;
 
     /**
-     * @ORM\ManyToMany(targetEntity="CoreBundle\Entity\Printing")
+     * @ORM\ManyToMany(targetEntity="CoreBundle\Entity\Printing", inversedBy="products")
+     * @ORM\JoinTable(name="product_printing")
      */
     private $printings;
 
