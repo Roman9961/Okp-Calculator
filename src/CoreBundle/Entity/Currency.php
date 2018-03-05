@@ -51,14 +51,28 @@ class Currency
     private $printTypes;
 
     /**
-     * Currency constructor.
-     * @param string $papers
-     * @param string $printTypes
+     * @var string
+     *
+     * @ORM\OneToMany(targetEntity="CoreBundle\Entity\PostPrintMaterial", mappedBy="currency")
      */
-    public function __construct($papers, $printTypes)
+    private $postPrintMaterial;
+
+    /**
+     * @var string
+     *
+     * @ORM\OneToMany(targetEntity="CoreBundle\Entity\PostPrintOperation", mappedBy="currency")
+     */
+    private $postPrintOperation;
+
+    /**
+     * Currency constructor.
+     */
+    public function __construct()
     {
         $this->papers = new ArrayCollection();
         $this->printTypes = new ArrayCollection();
+        $this->postPrintMaterial = new ArrayCollection();
+        $this->postPrintOperation = new ArrayCollection();
     }
 
     /**
